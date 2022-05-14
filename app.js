@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { throwMiddleware } = require('./middlewares/handleErrorMiddleware');
+const { validateProducts } = require('./middlewares/productsMiddleware');
 const controller = require('./controllers');
 
 const app = express();
@@ -17,6 +18,9 @@ app.get('/products/:id', controller.products.getProductId);
 
 app.get('/sales', controller.sales.getAllSales);
 app.get('/sales/:id', controller.sales.getSaleId);
+
+app.post('/products', validateProducts, controller.products.createProduct);
+// app.post('/products', validateProducts);
 
 app.use(throwMiddleware);
 
