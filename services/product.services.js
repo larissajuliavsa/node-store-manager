@@ -18,7 +18,17 @@ const getProductId = async (id) => {
   return productId;
 };
 
+const createProduct = async (name, quantity) => {
+  const findProduct = await models.products.findProductName(name);
+  console.log(findProduct);
+  if (findProduct) throw errorMessage(409, 'Product already exists');
+
+  const newProduct = await models.products.createProduct(name, quantity);
+  return newProduct;
+};
+
 module.exports = {
   getAllProducts,
   getProductId,
+  createProduct,
 };
