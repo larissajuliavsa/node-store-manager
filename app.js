@@ -20,7 +20,8 @@ app.get('/sales', controller.sales.getAllSales);
 app.get('/sales/:id', controller.sales.getSaleId);
 
 app.post('/products', validateProducts, controller.products.createProduct);
-// app.post('/products', validateProducts);
+
+app.put('/products/:id', controller.products.updateProduct);
 
 app.use(throwMiddleware);
 
