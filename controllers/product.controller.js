@@ -27,9 +27,10 @@ const createProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
   try {
-    const { id, name, quantity } = req.body;
+    const { id } = req.params;
+    const { name, quantity } = req.body;
     const update = await service.products.updateProduct(id, name, quantity);
-    return res.status(20).json(update);
+    return res.status(200).json(update);
   } catch (err) {
     next(err);
   }
