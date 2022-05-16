@@ -18,7 +18,18 @@ const getSaleId = async (id) => {
   return saleId;
 };
 
+const createSales = async (create) => {
+  const idCreated = await models.sales.createSaleId();
+
+  await Promise.all(create.map(({ productId, quantity }) =>
+    models.sales.createSales(idCreated, productId, quantity)));
+  // console.log('Console Services:  ', create) ----  retornando como Promise pending, resolver com PromiseAll
+
+  return { id: idCreated, itemsSold: [...create] };
+};
+
 module.exports = {
   getAllSales,
   getSaleId,
+  createSales,
 };
