@@ -39,9 +39,10 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletePdt = await service.products.deleteProductId(id);
+    const deletePdt = await service.products.deleteProduct(id);
     return res.status(204).json(deletePdt);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
