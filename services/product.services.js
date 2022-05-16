@@ -20,7 +20,7 @@ const getProductId = async (id) => {
 
 const createProduct = async (name, quantity) => {
   const findProduct = await models.products.findProductName(name);
-  // console.log(findProduct);
+
   if (findProduct) throw errorMessage(409, 'Product already exists');
 
   const newProduct = await models.products.createProduct(name, quantity);
