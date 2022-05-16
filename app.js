@@ -23,7 +23,7 @@ app.delete('/products/:id', controller.products.deleteProduct);
 app.get('/sales', controller.sales.getAllSales);
 app.get('/sales/:id', controller.sales.getSaleId);
 
-app.post('/sales', controller.products.createSales);
+app.post('/sales', controller.sales.createSales);
 
 app.use(throwMiddleware);
 
