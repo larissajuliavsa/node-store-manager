@@ -23,6 +23,8 @@ app.post('/products', validateProducts, controller.products.createProduct);
 
 app.put('/products/:id', controller.products.updateProduct);
 
+app.delete('/products/:id', controller.products.deleteProduct);
+
 app.use(throwMiddleware);
 
 // não remova essa exportação, é para o avaliador funcionar
