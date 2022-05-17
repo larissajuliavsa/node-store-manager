@@ -21,7 +21,6 @@ const createSales = async (req, res, next) => {
     const newSales = await service.sales.createSales(create);
     return res.status(201).json(newSales);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
@@ -33,7 +32,6 @@ const updateSales = async (req, res, next) => {
     const update = await service.sales.updateSales(id, updateBody);
     return res.status(200).json(update);
   } catch (err) {
-    // console.log(err);
     next(err);
   }
 };
