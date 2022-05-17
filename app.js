@@ -16,14 +16,20 @@ app.get('/', (_request, response) => {
 
 app.get('/products', controller.products.getAllProducts);
 app.get('/products/:id', controller.products.getProductId);
+
 app.post('/products', validateProducts, controller.products.createProduct);
+
 app.put('/products/:id', validateProducts, controller.products.updateProduct);
+
 app.delete('/products/:id', controller.products.deleteProduct);
 
 app.get('/sales', controller.sales.getAllSales);
 app.get('/sales/:id', controller.sales.getSaleId);
+
 app.post('/sales', validateSales, controller.sales.createSales);
+
 app.put('/sales/:id', validateSales, controller.sales.updateSales);
+
 app.delete('/sales/:id', controller.sales.deleteSales);
 
 app.use(throwMiddleware);
