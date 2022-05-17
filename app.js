@@ -24,7 +24,7 @@ app.get('/sales', controller.sales.getAllSales);
 app.get('/sales/:id', controller.sales.getSaleId);
 
 app.post('/sales', controller.sales.createSales);
-app.put('/sales/:id', controller.sales.updateSSELECT * FROM StoreManager.sales_products;ales);
+app.put('/sales/:id', controller.sales.updateSales);
 
 app.use(throwMiddleware);
 
