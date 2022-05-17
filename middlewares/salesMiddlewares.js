@@ -6,8 +6,7 @@ const schemaSales = Joi.object({
 });
 
 const validateSales = (req, _res, next) => {
-  // eslint-disable-next-line prefer-destructuring
-  const body = req.body;
+  const { body } = req;
 
   body.forEach(({ productId, quantity }) => {
     const { error } = schemaSales.validate({ productId, quantity });
