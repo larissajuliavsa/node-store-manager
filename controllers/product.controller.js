@@ -42,7 +42,6 @@ const deleteProduct = async (req, res, next) => {
     const deletePdt = await service.products.deleteProduct(id);
     return res.status(204).json(deletePdt);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
