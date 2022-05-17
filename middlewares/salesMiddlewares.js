@@ -1,18 +1,22 @@
 const Joi = require('joi');
 
-const schema = Joi.object({
+const schemaSales = Joi.object({
   productId: Joi.number().required(),
-  quantity: Joi.number().min(1).required(),
+  quantity: Joi.number().min(1).integer().required(),
 });
 
 const validateSales = (req, _res, next) => {
-  const { productId, quantity } = req.body;
-  const { error } = schema.validate({ productId, quantity });
+  // eslint-disable-next-line prefer-destructuring
+  const body = req.body;
 
-  if (error) {
-    const errorType = error.message.includes('required') ? 400 : 422;
-    return next({ status: errorType, message: error.message });
-  }
+  body.forEach(({ productId, quantity }) => {
+    const { error } = schemaSales.validate({ productId, quantity });
+    if (error) {
+        const errorType = error.message.includes('required') ? 400 : 422;
+        return next({ status: errorType, message: error.message });
+      }
+  });
+
   next();
 };
 

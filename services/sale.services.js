@@ -23,13 +23,29 @@ const createSales = async (create) => {
 
   await Promise.all(create.map(({ productId, quantity }) =>
     models.sales.createSales(idCreated, productId, quantity)));
-  // console.log('Console Services:  ', create) ----  retornando como Promise pending, resolver com PromiseAll
 
   return { id: idCreated, itemsSold: [...create] };
+};
+
+const updateSales = async (id, updateBody) => {
+  await Promise.all(updateBody.map(({ productId, quantity }) =>
+  models.sales.updateSales(id, productId, quantity)));
+
+  return { saleId: id, itemUpdated: [...updateBody] };
+};
+
+const deleteSales = async (id) => {
+  const findSale = await models.sales.getSaleId(id);
+  if (!findSale || findSale.length === 0) throw errorMessage(404, 'Sale not found');
+
+  const deleteSl = await models.sales.deleteSales(id);
+  return deleteSl;
 };
 
 module.exports = {
   getAllSales,
   getSaleId,
   createSales,
+  updateSales,
+  deleteSales,
 };
