@@ -23,6 +23,9 @@ const createSales = async (create) => {
 
   await Promise.all(create.map(({ productId, quantity }) =>
     models.sales.createSales(idCreated, productId, quantity)));
+  
+  await Promise.all(create.map(({ productId, quantity }) =>
+  models.sales.minusSalesQuantity(productId, quantity)));
 
   return { id: idCreated, itemsSold: [...create] };
 };
@@ -37,6 +40,11 @@ const updateSales = async (id, updateBody) => {
 const deleteSales = async (id) => {
   const findSale = await models.sales.getSaleId(id);
   if (!findSale || findSale.length === 0) throw errorMessage(404, 'Sale not found');
+  
+  if (findSale.length > 0) {
+    await Promise.all(findSale.map(({ productId, quantity }) =>
+    models.sales.sumSalesQuantity(productId, quantity)));
+  }
 
   const deleteSl = await models.sales.deleteSales(id);
   return deleteSl;
