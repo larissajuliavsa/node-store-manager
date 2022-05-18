@@ -36,6 +36,13 @@ const deleteProduct = async (id) => {
   await connection.execute(query, [id]);
 };
 
+const sumSalesQuantity = async (id, quantity) => {
+  const query = 'UPDATE StoreManager.products SET quantity = quantity + ? WHERE id = ?;';
+  const [salesQuantity] = await connection.execute(query, [quantity, id]);
+  return salesQuantity;
+
+};
+
 module.exports = {
   getAllProducts,
   getProductId,
@@ -43,4 +50,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  sumSalesQuantity,
 };
