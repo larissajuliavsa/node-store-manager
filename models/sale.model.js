@@ -56,6 +56,11 @@ const sumSalesQuantity = async (id, quantity) => {
   return salesQuantity;
 };
 
+const minusSalesQuantity = async (id, quantity) => {
+  const query = 'UPDATE StoreManager.products SET quantity = quantity - ? WHERE id = ?;';
+  const [salesQuantity] = await connection.execute(query, [quantity, id]);
+  return salesQuantity;
+};
 
 module.exports = {
   getAllSales,
@@ -65,4 +70,5 @@ module.exports = {
   updateSales,
   deleteSales,
   sumSalesQuantity,
+  minusSalesQuantity,
 };
