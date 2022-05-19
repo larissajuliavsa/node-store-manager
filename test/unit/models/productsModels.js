@@ -134,4 +134,27 @@ describe('Teste de Cobertura na Camada Product Models', () => {
   
   });
 
+  describe('Model createProduct', () => {
+    const product = { "name": "produto", "quantity": 100 }
+    
+    before(async () => {
+      const execute = [{ insertId: 1 }];
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+  
+    after(async () => {
+      connection.execute.restore();
+    });
+  
+    it('createProduct retorna um array de objetos', async () => {
+      const [response] = await models.createProduct(product);
+      expect(response).to.be.an('object');
+    });
+  
+    it('createProduct retorna objeto com as chaves id, name, quantity', async () => {
+      const [response] = await models.createProduct(product);
+      expect(response).to.have.keys({ "id": 1, "name": "produto", "quantity": 10 });
+    });
+  });
+
 });
