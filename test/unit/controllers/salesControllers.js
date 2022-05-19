@@ -93,4 +93,40 @@ describe('Teste de Cobertura na Camada Sale Controllers', () => {
     });
   });
 
+  describe('Controller getSaleId com id correto', () => {
+    const response = {};
+    const request = {};
+    const execute = [
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:54.000Z",
+        "productId": 2,
+        "quantity": 2
+      }
+    ]
+  
+    before(() => {
+      request.params = { id: 1 };
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+  
+      sinon.stub(services, 'getSaleId').throws(execute);
+    });
+  
+    after(() => {
+      services.getSaleId.restore();
+    });
+  
+    it('é retornado status 200', async () => {
+      await controllers.getSaleId(request, response);
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
+  
+    it('getSaleId retorna um array de objeto', async () => {
+      await controllers.getSaleId(request, response);
+      expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
+    });
+  
+  });
+  
 });
