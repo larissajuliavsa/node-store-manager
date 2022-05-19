@@ -68,4 +68,29 @@ describe('Teste de Cobertura na Camada Sale Controllers', () => {
     
   });
 
+  describe('Controller getSaleId com id errado', () => {
+    const response = {};
+    const request = {};
+  
+    const spy = sinon.spy();
+    const execute = { status: 404, message: 'Product not found' }
+  
+    before(() => {
+      request.params = { id: 100 };
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+  
+      sinon.stub(services, 'getSaleId').throws(execute);
+    });
+  
+    after(() => {
+      services.getSaleId.restore();
+    });
+  
+    it('é retornado status 404', async () => {
+      await controllers.getSaleId(request, response, spy);
+      expect(spy.calledWith(execute)).to.be.equal(true);
+    });
+  });
+
 });
