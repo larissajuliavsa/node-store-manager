@@ -102,26 +102,4 @@ describe('Teste de Cobertura na Camada Product Services', () => {
 
   });
 
-  describe('Service createProduct', () => {
-    const product = { "name": "produto", "quantity": 100 }
-    
-    before(async () => {
-      const execute = [{ insertId: 1 }];
-      sinon.stub(models, 'createProduct').resolves(execute);
-    })
-
-    after(async () => {
-      models.createProduct.restore();
-    });
-
-    it('createProduct retorna um array de objetos', async () => {
-      const [response] = await services.createProduct(product);
-      expect(response).to.be.an('object');
-    });
-
-    it('createProduct retorna objeto com as chaves id, name, quantity', async () => {
-      const [response] = await services.createProduct(product);
-      expect(response).to.have.keys({ "id": 1, "name": "produto", "quantity": 10 });
-    });
-  });
 });

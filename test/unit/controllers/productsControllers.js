@@ -86,39 +86,4 @@ describe('Teste de Cobertura na Camada Product Controllers', () => {
     });
   });
 
-  describe('Controller getProductId com id correto', () => {
-    const response = {};
-    const request = {};
-    const execute = [
-      {
-        "id": 1,
-        "name": "Martelo de Thor",
-        "quantity": 10
-      },
-    ];
-
-    before(() => {
-      request.params = { id: 1 };
-      response.status = sinon.stub().returns(response);
-      response.json = sinon.stub().returns();
-
-      sinon.stub(services, 'getProductId').throws(execute);
-    });
-
-    after(() => {
-      services.getProductId.restore();
-    });
-
-    it('é retornado status 200', async () => {
-      await controllers.getProductId(request, response);
-      expect(response.status.calledWith(200)).to.be.equal(true);
-    });
-
-    it('getProductId retorna um array de objeto', async () => {
-      await controllers.getProductId(request, response);
-      expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
-    });
-
-  });
-
 });
