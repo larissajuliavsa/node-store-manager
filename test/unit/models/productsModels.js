@@ -102,4 +102,36 @@ describe('Teste de Cobertura na Camada Product Models', () => {
     });
   
   });
+
+  describe('Model findProductName', () => {
+    const execute = [
+      {
+        "id": 1,
+        "name": "Martelo de Thor",
+        "quantity": 10
+      },
+    ];
+  
+    before(() => {
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+  
+    after(() => {
+      connection.execute.restore();
+    });
+  
+    it('findProductName retorna um objeto', async () => {
+      const [response] = await models.findProductName();
+  
+      expect(response).to.be.an('object');
+    });
+  
+    it('findProductName retorna o valor de name', async () => {
+      const [response] = await models.findProductName();
+  
+      expect(response).to.have.keys({"name": "Martelo de Thor"});
+    });
+  
+  });
+
 });
