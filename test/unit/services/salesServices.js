@@ -59,5 +59,36 @@ describe('Teste de Cobertura na Camada Sale Services', () => {
     });
     
   });
+
+  describe('Service getSaleId', () => {
+    const execute = [
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:54.000Z",
+        "productId": 2,
+        "quantity": 2
+      }
+    ]
+
+    before(() => {
+      sinon.stub(models, 'getSaleId').resolves(execute);
+    })
+
+    after(() => {
+      models.getSaleId.restore();
+    });
+
+    it('getSaleId retorna um array de objeto', async () => {
+      const [response] = await services.getSaleId(1);
+      expect(response).to.be.an('object');
+    });
+
+    it('getSaleId retorna as chaves do objeto', async () => {
+      const [response] = await services.getSaleId(1);
+
+      expect(response).to.have.all.keys('productId', 'quantity')
+    });
+
+});
   
 });
