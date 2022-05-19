@@ -89,6 +89,35 @@ describe('Teste de Cobertura na Camada Sale Services', () => {
       expect(response).to.have.all.keys('productId', 'quantity')
     });
 
-});
+  });
   
+  describe('Service createSales', () => {
+    const product = [
+      {
+        "productId": 1,
+        "quantity": 3
+      }
+    ]
+  
+    before(async () => {
+      const execute = [{ insertId: 3 }]
+      sinon.stub(models, 'createSales').resolves(execute);
+    });
+  
+    after(async () => {
+      models.createSales.restore();
+    })
+  
+    it('createSales retorna um array de objetos', async () => {
+      const [response] = await services.createSales(3, product.productId, product.quantity);
+  
+      expect(response).to.be.an('object');
+    })
+  
+    it('createSales retorna com as chaves ', async () => {
+      const [response] = await services.createSales(3, product.productId, product.quantity);
+  
+      expect(response).to.have.all.keys('productId', 'quantity')
+    });
+  });
 });
