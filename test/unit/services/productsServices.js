@@ -58,4 +58,47 @@ describe('Teste de Cobertura na Camada Product Services', () => {
       expect(response).to.have.all.keys('id', 'name', 'quantity')
     });
   });
+
+  describe('Service getProductId', () => {
+    const execute = [
+      {
+        "id": 1,
+        "name": "Martelo de Thor",
+        "quantity": 10
+      },
+    ];
+
+    before(() => {
+      sinon.stub(models, 'getProductId').resolves(execute)
+    });
+    
+    after(() => {
+      models.getProductId.restore();
+    });
+
+    it('getProductId retorna um array', async () => {
+      const response = await services.getProductId();
+
+      expect(response).to.be.an('array');
+    });
+
+    it('getProductId se não retorna um array vazio', async () => {
+      const response = await services.getProductId();
+
+      expect(response).to.not.be.empty;
+    });
+
+    it('getProductId é um array de objeto', async () => {
+      const [response] = await services.getProductId();
+
+      expect(response).to.be.an('object');
+    });
+
+    it('getProductId retorna as chave id, name e quantity', async () => {
+      const [response] = await services.getProductId();
+
+      expect(response).to.have.all.keys('id', 'name', 'quantity')
+    });
+
+  });
 });
