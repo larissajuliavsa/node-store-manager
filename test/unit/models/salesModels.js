@@ -60,7 +60,7 @@ describe('Teste de Cobertura na Camada Sale Models', () => {
     });
     
   });
-  
+
   describe('Model getSaleId', () => {
     const execute = [
       {
@@ -90,5 +90,35 @@ describe('Teste de Cobertura na Camada Sale Models', () => {
       expect(response).to.have.all.keys('productId', 'quantity')
     });
 
+  });
+  
+  describe('Model createSales', () => {
+    const product = [
+      {
+        "productId": 1,
+        "quantity": 3
+      }
+    ]
+  
+    before(async () => {
+      const execute = [{ insertId: 3 }]
+      sinon.stub(connection, 'execute').resolves(execute);
+    });
+  
+    after(async () => {
+      connection.execute.restore();
+    })
+  
+    it('createSales retorna um array de objetos', async () => {
+      const [response] = await models.createSales(3, product.productId, product.quantity);
+  
+      expect(response).to.be.an('object');
+    })
+  
+    it('createSales retorna com as chaves ', async () => {
+      const [response] = await models.createSales(3, product.productId, product.quantity);
+  
+      expect(response).to.have.all.keys('productId', 'quantity')
+    });
   });
 });
