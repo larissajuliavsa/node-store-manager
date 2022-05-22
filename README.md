@@ -2,7 +2,7 @@
 <h3 align="center">Stock Management Database</h3>
 
 <p align="center">
-  Store Manager is a stock database management from a fake store. I manipulated the data from MySql with Node.js and handled client's requests with the     proper response's status. The client is able to register, update, delete and consult his products and sales. In this project I developed with API         RESTful, MSC layers and tests using Chai and Sinon.
+  Store Manager is a stock database management from a fake store. I manipulated the data from MySql with Node.js and handled client's requests with the     proper response's status. The client is able to register, update, delete and consult his products and sales. In this project I developed with API         RESTful, MSC layers and tests using Chai and Sinon. I also want to give credits to Trybe for giving StoreManager.sql and index.js files, thanks! 
 </p>
 
 <p align="center">
